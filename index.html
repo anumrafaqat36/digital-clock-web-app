@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Digital Clock</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="container">
+
+        <!-- Theme Switcher -->
+        <div class="theme-switcher">
+
+            <p class="theme-title">🎨 Choose Theme</p>
+
+            <button class="theme blue" onclick="changeTheme('blue')"></button>
+            <button class="theme purple" onclick="changeTheme('purple')"></button>
+            <button class="theme green" onclick="changeTheme('green')"></button>
+            <button class="theme red" onclick="changeTheme('red')"></button>
+            <button class="theme pink" onclick="changeTheme('pink')"></button>
+            <button class="theme dark" onclick="changeTheme('dark')"></button>
+
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-tabs">
+
+            <button class="tab active" onclick="showSection('clock',this)">
+                🕒 Clock
+            </button>
+
+            <button class="tab" onclick="showSection('stopwatch',this)">
+                ⏱ Stopwatch
+            </button>
+
+            <button class="tab" onclick="showSection('timer',this)">
+                ⏲ Timer
+            </button>
+
+            <button class="tab" onclick="showSection('alarm',this)">
+                ⏰ Alarm
+            </button>
+
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+
+            <h1>Digital Clock</h1>
+
+            <button id="formatBtn" onclick="toggleFormat()">
+                24H
+            </button>
+
+        </div>
+
+        <!-- CLOCK -->
+        <section id="clockSection">
+
+            <div class="clock">
+
+                <span id="hours">00</span>
+                <span>:</span>
+                <span id="minutes">00</span>
+                <span>:</span>
+                <span id="seconds">00</span>
+
+            </div>
+
+            <p id="date"></p>
+
+        </section>
+
+        <!-- STOPWATCH -->
+        <section id="stopwatchSection" style="display:none;">
+
+            <h2>⏱ Stopwatch</h2>
+
+            <div class="stopwatch-display" id="stopwatchDisplay">
+                00:00:00
+            </div>
+
+            <div class="controls">
+
+                <button onclick="startStopwatch()">▶ Start</button>
+
+                <button onclick="pauseStopwatch()">⏸ Pause</button>
+
+                <button onclick="resetStopwatch()">🔄 Reset</button>
+
+            </div>
+
+        </section>
+
+        <!-- TIMER -->
+        <section id="timerSection" style="display:none;">
+
+            <h2>⏲ Countdown Timer</h2>
+
+            <div class="timer-inputs">
+
+                <input type="number" id="timerMinutes" placeholder="Minutes" min="0">
+
+                <input type="number" id="timerSeconds" placeholder="Seconds" min="0" max="59">
+
+            </div>
+
+            <div class="timer-display" id="timerDisplay">
+                00:00
+            </div>
+
+            <div class="controls">
+
+                <button onclick="startTimer()">▶ Start</button>
+
+                <button onclick="pauseTimer()">⏸ Pause</button>
+
+                <button onclick="resetTimer()">🔄 Reset</button>
+
+            </div>
+
+        </section>
+
+     <!-- ================= ALARM ================= -->
+<section id="alarmSection" style="display:none;">
+
+    <h2>⏰ Smart Alarm Clock</h2>
+
+    <div class="alarm-box">
+
+        <div class="alarm-row">
+
+    <div class="alarm-item">
+        <label for="alarmTime">⏰ Select Time</label>
+        <input type="time" id="alarmTime">
+    </div>
+
+    <div class="alarm-item">
+        <label for="alarmSound">🎵 Alarm Sound</label>
+
+        <select id="alarmSound">
+            <option value="alarm-tone.wav">🔔 Alarm Tone</option>
+            <option value="classic-alarm.wav">⏰ Classic Alarm</option>
+            <option value="cartoon-laugh-alarm.wav">😂 Cartoon Laugh</option>
+            <option value="meow_alarm.wav">🐱 Cat Meow</option>
+            <option value="rooster-crowing_alarm.wav">🐓 Rooster</option>
+        </select>
+
+        <button class="preview-btn" onclick="previewSound()">
+            🎵 Preview
+        </button>
+    </div>
+
+</div>
+        <br><br>
+
+        <div class="alarm-buttons">
+
+    <button class="set-btn" onclick="setAlarm()">
+        <i class="fa-solid fa-bell"></i>
+        Set Alarm
+    </button>
+
+    <button class="clear-btn" onclick="clearAlarm()">
+        <i class="fa-solid fa-trash"></i>
+        Clear Alarm
+    </button>
+
+</div>
+
+        <p id="alarmStatus">
+    🔕 No alarm set.
+</p>
+
+    </div>
+
+</section>
+
+<!-- ================= ALARM POPUP ================= -->
+
+<div id="alarmPopup" class="alarm-popup">
+
+    <div class="popup-content">
+
+        <h2>⏰ Alarm Ringing!</h2>
+
+        <p id="popupMessage">
+    Wake up! Have a wonderful day 🌞
+</p>
+
+        <div class="popup-buttons">
+
+            <button onclick="stopAlarm()">
+                🔕 Stop
+            </button>
+
+            <button onclick="snoozeAlarm()">
+                😴 Snooze (5 min)
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2026 Designed & Developed by <strong>Anum Rafaqat</strong></p>
+</footer>
+    <!-- JavaScript -->
+    <script src="js/theme.js"></script>
+    <script src="js/clock.js"></script>
+    <script src="js/stopwatch.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/alarm.js"></script>
+
+    <!-- Navigation Script -->
+    <script>
+        function showSection(section, button) {
+
+            document.getElementById("clockSection").style.display = "none";
+            document.getElementById("stopwatchSection").style.display = "none";
+            document.getElementById("timerSection").style.display = "none";
+            document.getElementById("alarmSection").style.display = "none";
+
+            document.getElementById(section + "Section").style.display = "block";
+
+            document.querySelectorAll(".tab").forEach(tab => {
+                tab.classList.remove("active");
+            });
+
+            button.classList.add("active");
+        }
+    </script>
+
+</body>
+
+</html>
